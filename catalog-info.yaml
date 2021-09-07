@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: nlu-brain-api
+  annotations:
+    github.com/project-slug: HectorPulido/nlu-brain-api
+spec:
+  type: other
+  lifecycle: unknown
+  owner: infrastructure
