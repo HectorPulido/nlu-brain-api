@@ -1,0 +1,11 @@
+engine.nlu
+staticfiles
+secret.py
+__pycache__
+.vscode
+venv
+env
+*.pyc
+env/
+db.sqlite3
+*.csv

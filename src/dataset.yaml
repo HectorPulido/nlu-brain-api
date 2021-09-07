@@ -1,0 +1,90 @@
+# SMALLTALKS
+---
+type: intent
+name: small_talk
+utterances:
+  - hola
+  - ¿Como estas?
+  - buenos dias
+  - buenas tardes
+
+---
+type: intent
+name: doubts
+utterances:
+  - tengo una pregunta
+  - ¿puedes ayudarme?
+  - ¿que puedes hacer?
+
+---
+type: intent
+name: lore
+utterances:
+  - hablame de ti
+  - ¿quien eres?
+  - ¿eres un robot?
+  - ¿vienes del futuro?
+  - ¿quien te ha creado?
+
+
+---
+type: intent
+name: fun_phrases
+utterances:
+  - ¿conoces algun chiste?
+  - eres gracioso
+  - me gustas
+  - ¿te gusto?
+  - ¿te gustan las personas?
+  - ¿eres parte de la matrix?
+  - eres adorable
+  - eres muy inteligente
+
+
+---
+type: intent
+name: bad_words
+utterances:
+  - jodete
+  - eres un idiota
+  - eres una mierda
+  - eres una puta
+  - eres una molestia
+
+---
+type: intent
+name: search
+utterances:
+  - ¿puedes buscar sobre [topic](react)?
+  - ¿tienes algun tutorial de [topic](github)?
+  - ¿sabes algo de [topic](rust)?
+  - pasame un tutorial de [topic](ionic)
+  - como puedo hacer un [topic](blog)
+  - sabes algo de como hacer un [topic](bot de discord)
+
+---
+type: intent
+name: meme
+utterances:
+  - ¿conoces algun buen meme?
+  - pasame un meme
+  - muestrame un meme
+
+---
+type: intent
+name: who_follow
+utterances:
+  - ¿a quien seguir?
+  - ¿me recomiendas alguna cuenta?
+
+# entity
+---
+type: entity
+name: topic
+automatically_extensible: true
+values:
+- react
+- rust
+- python
+- github
+- ionic
