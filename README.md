@@ -20,11 +20,13 @@ This is a heroku based project
 docker build -t web:latest .
 docker run -d --name <herokuname> -e "PORT=8765" -e "DEBUG=0" -p 8007:8765 web:latest
 ```
+
 3. You can deactivate like this
 ```
 docker stop <herokuname>
 docker rm <herokuname>
 ```
+
 4. You can upload your project with this commands
 ```
 docker run -d --name <herokuname> -e "PORT=8765" -e "DEBUG=0" -p 8007:8765 web:latest
@@ -32,29 +34,20 @@ heroku container:login
 heroku container:push web -a <herokuname>
 heroku container:release web -a <herokuname>
 ```
-5. Do not forget to migrate
-```
-heroku run python manage.py migrate -a <herokuname>
-```
 
-6. Create your user with
+5. Create your user with
 ```
 heroku run python manage.py createsuperuser -a <herokuname>
 ```
 
-7. Enter to your proyect from this url
+6. Enter to your proyect from this url
 ```
 http://<herokuname>.herokuapp.com/admin
 ```
 
-8. Enter to your proyect from this url
-```
-http://<herokuname>.herokuapp.com/admin
-```
+7. Create an Key to interact with the API
 
-9. Create an Key to interact with the API
-
-10. You are ready
+8. You are ready
 
 
 ## More interesting projects
