@@ -1,5 +1,5 @@
 # pull official base image
-FROM python:3.8-alpine
+FROM python:3.8-slim-buster
 
 # set work directory
 WORKDIR /app
@@ -9,12 +9,11 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV DEBUG 0
 
-# install psycopg2
-RUN apk update \
-    && apk add --virtual build-deps gcc python3-dev musl-dev \
-    && apk add postgresql-dev \
-    && pip install psycopg2 \
-    && apk del build-deps
+# # install psycopg2
+RUN apt-get update \
+    && apt-get install postgresql postgresql-contrib libpq-dev python-dev gcc -y
+
+RUN pip install psycopg2
 
 # install dependencies
 COPY ./requirements.txt .
@@ -29,9 +28,4 @@ RUN python manage.py collectstatic --noinput
 
 RUN python manage.py migrate
 
-
-# add and run as non-root user
-RUN adduser -D myuser
-USER myuser
-
-CMD gunicorn twitter_bot.wsgi:application --bind 0.0.0.0:$PORT
+CMD gunicorn backend.wsgi:application --bind 0.0.0.0:$PORT
