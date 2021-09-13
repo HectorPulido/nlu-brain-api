@@ -1,3 +1,4 @@
+import hashlib
 from django.db import models
 
 
@@ -16,6 +17,8 @@ class Record(models.Model):
         MEME = "ME", "Meme"
         JOB_OFFER = "JO", "Job offer"
 
+    shash = models.CharField(max_length=255, unique=True, db_index=True, null=True, blank=True)
+
     data = models.CharField(max_length=500)
 
     record_index = models.CharField(max_length=500, db_index=True)
@@ -28,6 +31,13 @@ class Record(models.Model):
     )
 
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, **kwargs):
+        self.data = self.data.strip()
+        self.shash = hashlib.md5(self.data.encode()).hexdigest()
+        if Record.objects.filter(shash=self.shash).exists():
+            return None
+        super().save(**kwargs)
 
     def __str__(self):
         return self.data
