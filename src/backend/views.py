@@ -42,7 +42,7 @@ class ChatphraseViewset(APIView):
     def get_text(self, intent, data):
         return self.intents[intent](data)
 
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         if not check_key(request):
             return Response(status=status.HTTP_403_FORBIDDEN)
 
