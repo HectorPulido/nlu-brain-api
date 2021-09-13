@@ -69,6 +69,10 @@ utterances:
   - ¿conoces algun buen meme?
   - pasame un meme
   - muestrame un meme
+  - ¿tienes algun meme?
+  - pasa memes
+  - muestrame algunos memes
+  - meme
 
 ---
 type: intent
