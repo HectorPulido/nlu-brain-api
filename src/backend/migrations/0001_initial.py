@@ -7,28 +7,64 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Key',
+            name="Key",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(db_index=True, max_length=100, unique=True)),
-                ('enabled', models.BooleanField(default=False)),
-                ('private_key', models.TextField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(db_index=True, max_length=100, unique=True)),
+                ("enabled", models.BooleanField(default=False)),
+                ("private_key", models.TextField()),
             ],
         ),
         migrations.CreateModel(
-            name='Record',
+            name="Record",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('shash', models.CharField(blank=True, db_index=True, max_length=255, null=True, unique=True)),
-                ('data', models.CharField(max_length=500)),
-                ('record_index', models.CharField(db_index=True, max_length=500)),
-                ('record_type', models.CharField(choices=[('RS', 'Resource'), ('ME', 'Meme'), ('JO', 'Job offer')], db_index=True, default='RS', max_length=2)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "shash",
+                    models.CharField(
+                        blank=True,
+                        db_index=True,
+                        max_length=255,
+                        null=True,
+                        unique=True,
+                    ),
+                ),
+                ("data", models.CharField(max_length=500)),
+                ("record_index", models.CharField(db_index=True, max_length=500)),
+                (
+                    "record_type",
+                    models.CharField(
+                        choices=[
+                            ("RS", "Resource"),
+                            ("ME", "Meme"),
+                            ("JO", "Job offer"),
+                        ],
+                        db_index=True,
+                        default="RS",
+                        max_length=2,
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
             ],
         ),
     ]

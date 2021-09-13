@@ -3,5 +3,6 @@ from django.utils.safestring import mark_safe
 
 from .models import *
 
+admin.site.register(UnresolvedQuestions)
 admin.site.register(Key)
 admin.site.register(Record)

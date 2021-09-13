@@ -2,6 +2,13 @@ import hashlib
 from django.db import models
 
 
+class UnresolvedQuestions(models.Model):
+    question = models.TextField()
+
+    def __str__(self):
+        return self.question
+
+
 class Key(models.Model):
     name = models.CharField(max_length=100, unique=True, db_index=True)
     enabled = models.BooleanField(default=False)
@@ -17,7 +24,9 @@ class Record(models.Model):
         MEME = "ME", "Meme"
         JOB_OFFER = "JO", "Job offer"
 
-    shash = models.CharField(max_length=255, unique=True, db_index=True, null=True, blank=True)
+    shash = models.CharField(
+        max_length=255, unique=True, db_index=True, null=True, blank=True
+    )
 
     data = models.CharField(max_length=500)
 

@@ -1,4 +1,5 @@
 import random
+from backend.models import UnresolvedQuestions
 
 
 def small_talk(data):
@@ -61,6 +62,8 @@ def bad_words(data):
 
 
 def none(data):
+    UnresolvedQuestions.objects.create(question=data["input"])
+
     responses = [
         "Eso... ¿fue español?",
         "¿No eres el especimen mas inteligente, verdad? repitelo mas despacio",
