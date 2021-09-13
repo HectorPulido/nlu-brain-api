@@ -44,7 +44,7 @@ class ChatphraseViewset(APIView):
 
     def get(self, request, *args, **kwargs):
         if not check_key(request):
-            Response(status=status.HTTP_403_FORBIDDEN)
+            return Response(status=status.HTTP_403_FORBIDDEN)
 
         phrase = self.kwargs.get("phrase")
         parsing = settings.CHATBOT.predict(phrase)
