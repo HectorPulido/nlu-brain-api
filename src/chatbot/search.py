@@ -7,7 +7,7 @@ def search_resource(data):
     except:
         return "No tengo nada para ti"
 
-    result = Record.search_record(value, "RS")
+    result = Record.search_record(value.lower(), "RS")
 
     if not result:
         return "No tengo nada para ti relacionado a {}".format(value)

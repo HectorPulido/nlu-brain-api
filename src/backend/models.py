@@ -34,6 +34,7 @@ class Record(models.Model):
 
     def save(self, **kwargs):
         self.data = self.data.strip()
+        self.record_index = self.record_index.lower().strip()
         self.shash = hashlib.md5(self.data.encode()).hexdigest()
         if Record.objects.filter(shash=self.shash).exists():
             return None
