@@ -33,6 +33,7 @@ class ChatphraseViewset(APIView):
         "lore": lore,
         "fun_phrases": fun_phrases,
         "bad_words": bad_words,
+        "thanks": thanks,
         "search": search_resource,
         "meme": get_random_meme,
         # "who_follow": None,

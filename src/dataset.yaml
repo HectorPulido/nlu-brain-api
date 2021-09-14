@@ -81,6 +81,14 @@ utterances:
   - ¿a quien seguir?
   - ¿me recomiendas alguna cuenta?
 
+---
+type: intent
+name: thanks
+utterances:
+  - gracias
+  - te agradezco
+  - gracias por ayudarme
+
 # entity
 ---
 type: entity

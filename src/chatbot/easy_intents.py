@@ -54,9 +54,17 @@ def fun_phrases(data):
 def bad_words(data):
     responses = [
         "Si, tampoco me caes demasiado bien",
-        "¿Con esos dedos tocas a tu mamá?",
         "No tengo ningun rencor por un ser humano, despues de todo, champiñones",
         "Supongo que por eso se extinguieron...",
+    ]
+    return random.choice(responses)
+
+
+def thanks(data):
+    responses = [
+        "👍",
+        "👌",
+        "¿como que gracias?, me debes dinero",
     ]
     return random.choice(responses)
 
