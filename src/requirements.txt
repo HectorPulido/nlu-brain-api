@@ -5,3 +5,4 @@ whitenoise==5.2.0
 django-extensions==3.1.1
 djangorestframework==3.12.4
 snips-nlu==0.20.2
+openai==0.11.0
