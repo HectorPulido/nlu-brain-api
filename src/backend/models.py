@@ -17,6 +17,14 @@ class Key(models.Model):
     def __str__(self):
         return self.name
 
+    @staticmethod
+    def get_key_data(name):
+        wh = Key.objects.filter(name=name, enabled=True)
+        if not wh.exists():
+            return ""
+        wh = wh.first()
+        return wh.private_key
+
 
 class Record(models.Model):
     class RecordType(models.TextChoices):

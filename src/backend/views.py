@@ -14,13 +14,9 @@ from chatbot.random_meme import get_random_meme
 
 def check_key(request):
     name = request.data.get("name")
-    wh = Key.objects.filter(name=name, enabled=True)
-    if not wh.exists():
-        return False
-    wh = wh.first()
-
     private_key = request.data.get("private_key")
-    return private_key == wh.private_key
+    wh = Key.get_key_data(name)
+    return private_key == wh
 
 
 class ChatphraseViewset(APIView):
@@ -28,15 +24,9 @@ class ChatphraseViewset(APIView):
     permission_classes = ()
 
     intents = {
-        "small_talk": small_talk,
         "doubts": doubts,
-        "lore": lore,
-        "fun_phrases": fun_phrases,
-        "bad_words": bad_words,
-        "thanks": thanks,
         "search": search_resource,
         "meme": get_random_meme,
-        # "who_follow": None,
         None: none,
     }
 

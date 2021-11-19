@@ -1,5 +1,6 @@
+import openai
 import random
-from backend.models import UnresolvedQuestions
+from backend.models import UnresolvedQuestions, Key
 
 
 def small_talk(data):
@@ -70,10 +71,26 @@ def thanks(data):
 
 
 def none(data):
-    UnresolvedQuestions.objects.create(question=data["input"])
+    openai.api_key = Key.get_key_data("openai_key")
+    personality = Key.get_key_data("openai_personality").format(data["input"])
+    return_value = ""
+    try:
+        response = openai.Completion.create(
+            engine="curie",
+            prompt=personality,
+            temperature=0.3,
+            max_tokens=150,
+            top_p=1,
+            frequency_penalty=0.8,
+            presence_penalty=0.6,
+            stop=["\n"],
+        )
+        return_value = response.choices[0]["text"]
+    except:
+        responses = [
+            "Eso... ¿fue español?",
+            "¿No eres el especimen mas inteligente, verdad? repitelo mas despacio",
+        ]
+        return_value = random.choice(responses)
 
-    responses = [
-        "Eso... ¿fue español?",
-        "¿No eres el especimen mas inteligente, verdad? repitelo mas despacio",
-    ]
-    return random.choice(responses)
+    return return_value
