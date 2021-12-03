@@ -19,6 +19,6 @@ from .views import *
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("phrase/<str:phrase>/", ChatphraseViewset.as_view()),
+    path("phrase/", ChatphraseViewset.as_view()),
     path("records/", RecordViewset.as_view({"get": "list", "post": "create"})),
 ]

@@ -37,8 +37,8 @@ class ChatphraseViewset(APIView):
         if not check_key(request):
             return Response(status=status.HTTP_403_FORBIDDEN)
 
-        phrase = self.kwargs.get("phrase")
-        parsing = settings.CHATBOT.predict(phrase)
+        query = request.data.get("query")
+        parsing = settings.CHATBOT.predict(query)
 
         try:
             intent = parsing["intent"]["intentName"]
