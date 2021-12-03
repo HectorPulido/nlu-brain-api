@@ -48,6 +48,8 @@ class ChatphraseViewset(APIView):
         if intent not in self.intents:
             intent = None
 
+        parsing["history"] = request.data.get("history")
+
         return Response(self.get_text(intent, parsing), status=status.HTTP_200_OK)
 
 
