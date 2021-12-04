@@ -41,7 +41,15 @@ class ChatphraseViewset(APIView):
         if not check_key(request):
             return Response(status=status.HTTP_403_FORBIDDEN)
 
+        filtered_response = Key.get_key_data("filtered_response")
+
         query = request.data.get("query")
+        if filter_response(query):
+            if not filtered_response:
+                filtered_response = "Lo siento no puedo responder a eso."
+
+            return Response(filtered_response, status=status.HTTP_200_OK)
+
         parsing = settings.CHATBOT.predict(query)
 
         try:
@@ -56,7 +64,8 @@ class ChatphraseViewset(APIView):
         response = self.get_text(intent, parsing)
 
         if filter_response(response):
-            filtered_response = Key.get_key_data("filtered_response")
+            if not filtered_response:
+                filtered_response = "Lo siento no puedo responder a eso."
 
             return Response(filtered_response, status=status.HTTP_200_OK)
 
