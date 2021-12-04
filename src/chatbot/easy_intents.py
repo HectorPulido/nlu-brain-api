@@ -71,21 +71,45 @@ def thanks(data):
     return random.choice(responses)
 
 
-def none(data):
+def default_response():
+    responses = [
+        "Eso... ¿fue español?",
+        "¿No eres el especimen mas inteligente, verdad? repitelo mas despacio",
+    ]
+    return random.choice(responses)
+
+
+def gpt3_response(data):
     openai.api_key = Key.get_key_data("openai_key")
-    personality = Key.get_key_data("openai_personality").format(data["history"])
-    values = json.loads(Key.get_key_data("openai_values"))
-    return_value = ""
+    personality = Key.get_key_data("openai_personality")
+
+    if not personality:
+        return default_response()
+    personality = personality.format(data["history"])
+
+    values = Key.get_key_data("openai_values")
+    if not values:
+        return default_response()
+    values = json.loads(values)
+
     try:
         response = openai.Completion.create(prompt=personality, **values)
-        return_value = response.choices[0]["text"]
+        return response.choices[0]["text"]
     except Exception as e:
         print(e)
+        return default_response()
 
-        responses = [
-            "Eso... ¿fue español?",
-            "¿No eres el especimen mas inteligente, verdad? repitelo mas despacio",
-        ]
-        return_value = random.choice(responses)
 
-    return return_value
+def filter_response(response):
+    filtered_words = Key.get_key_data("filtered_words")
+
+    if not filtered_words:
+        return False
+
+    filtered_words = json.loads(filtered_words)
+
+    for word in filtered_words:
+        if word in response:
+            return True
+
+    return False
