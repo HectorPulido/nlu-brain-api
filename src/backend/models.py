@@ -71,3 +71,24 @@ class Record(models.Model):
     @staticmethod
     def get_random_record(record_type):
         return Record.objects.filter(record_type=record_type).order_by("?").first()
+
+
+class ChannelType(models.Model):
+    class ChannelType(models.TextChoices):
+        RESOURCE = "RS", "Resource channel"
+        MEME = "ME", "Meme channel"
+        JOB_OFFER = "JO", "Job offers channel"
+        EMOJI_ONLY = "EM", "Emoji only channel"
+
+    name = models.CharField(max_length=250)
+    channel_id = models.CharField(max_length=100, unique=True)
+    type = models.CharField(max_length=2, choices=ChannelType.choices)
+
+    @classmethod
+    def get_all_channels_as_dict(cls):
+        return {
+            channel.channel_id: channel.type for channel in ChannelType.objects.all()
+        }
+
+    def __str__(self):
+        return f"{self.name} - {self.type}"
