@@ -16,13 +16,13 @@ RUN apt-get update \
 RUN pip install psycopg2
 
 # install dependencies
-COPY ./requirements.txt .
+COPY ./src/requirements.txt .
 RUN pip install -r requirements.txt
 
 RUN python -m snips_nlu download es
 
 # copy project
-COPY . .
+COPY ./src/ .
 
 RUN python manage.py collectstatic --noinput
 
