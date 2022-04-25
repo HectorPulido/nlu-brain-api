@@ -1,4 +1,6 @@
+from django.conf import settings
 from backend.models import Record
+from chatbot.elastic_search import SearchClient
 
 
 def search_resource(data):
@@ -7,9 +9,15 @@ def search_resource(data):
     except:
         return "No tengo nada para ti"
 
-    result = Record.search_record(value.lower(), "RS")
+    # Not using Elastic
+    if not settings.ELASTICSEARCH:
+        result = Record.search_record(value.lower(), "RS")
 
-    if not result:
-        return "No tengo nada para ti relacionado a {}".format(value)
+        if not result:
+            return "No tengo nada para ti relacionado a {}".format(value)
 
-    return "Aqui tienes humano: {}".format(result)
+        return "Aqui tienes humano: {}".format(result)
+
+    # Using Elastic
+    ...
+
