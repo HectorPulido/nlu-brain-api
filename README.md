@@ -18,6 +18,10 @@ This is a heroku based project
 
 ```
 docker build -t web:latest .
+
+# OR this, if you use an M1 Mac
+docker build -t web:latest -f Dockerfile_m1 .
+
 docker run -d --name <herokuname> -e "PORT=8765" -e "DEBUG=0" -p 8007:8765 web:latest
 ```
 
